@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leo Unban Tool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 20px;
+    }
+    .box {
+      max-width: 600px;
+      margin: auto;
+      background: #020617;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    h1 {
+      color: #22c55e;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    select, textarea, button {
+      width: 100%;
+      margin-top: 5px;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+    textarea {
+      height: 120px;
+    }
+    button {
+      background: #22c55e;
+      color: #020617;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .result {
+      margin-top: 20px;
+      background: #020617;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+    }
+    .warn {
+      color: #f87171;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    .small {
+      font-size: 14px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h1>Leo Unban Tool</h1>
+  <p class="small">
+    Leo Unban Tool does NOT unban WhatsApp accounts automatically.  
+    It helps users understand bans and generate a proper appeal message.
+  </p>
+
+  <label>Which app was banned?</label>
+  <select id="appType">
+    <option>WhatsApp</option>
+    <option>WhatsApp Business</option>
+  </select>
+
+  <label>What ban message did you see?</label>
+  <select id="banType">
+    <option value="temporary">Temporarily banned</option>
+    <option value="permanent">This account is not allowed to use WhatsApp</option>
+    <option value="business">This account can no longer use WhatsApp Business</option>
+  </select>
+
+  <label>Possible reason for the ban</label>
+  <select id="reason">
+    <option>sending a sticker unknowingly</option>
+    <option>forwarded content</option>
+    <option>automated or suspicious behavior</option>
+    <option>unknown or mistake</option>
+  </select>
+
+  <button onclick="generateAppeal()">Generate Appeal Message</button>
+
+  <div id="output" class="result" style="display:none;">
+    <h3>Your Appeal Message</h3>
+    <textarea id="appealText"></textarea>
+    <button onclick="copyText()">Copy Message</button>
+
+    <p class="warn">
+      ⚠️ Only submit appeals through the WhatsApp app or official WhatsApp support.
+    </p>
+
+    <p class="small">
+      Official support email: smb_web@support.whatsapp.com
+    </p>
+  </div>
+</div>
+
+<script>
+function generateAppeal() {
+  const app = document.getElementById("appType").value;
+  const reason = document.getElementById("reason").value;
+
+  let message =
+`Hello WhatsApp Support Team,
+
+My ${app} account was banned, and I sincerely apologize for violating WhatsApp policies.
+
+The issue may have occurred due to ${reason}. This was not intentional, and I deeply regret it.
+
+I take full responsibility and assure you this will not happen again. I kindly request a review of my account.
+
+Thank you for your time and understanding.
+`;
+
+  document.getElementById("appealText").value = message;
+  document.getElementById("output").style.display = "block";
+}
+
+function copyText() {
+  const text = document.getElementById("appealText");
+  text.select();
+  document.execCommand("copy");
+  alert("Appeal message copied!");
+}
+</script>
+
+</body>
+</html>
